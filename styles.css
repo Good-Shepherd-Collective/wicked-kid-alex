@@ -72,3 +72,9 @@ opacity: .5;
     border-right: .5vh solid var(--foreground-color);
     padding-right: 3.5vh;
 }
+
+.title{
+    color: var(--foreground-color);
+    font-family: monospace;
+    text-align: center;
+}
