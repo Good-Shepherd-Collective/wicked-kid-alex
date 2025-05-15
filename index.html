@@ -3,20 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wicked Kid Alex - An online game by Alex O'Rourke. Play this fun interactive pong-style game created by Alex O'Rourke.">
+    <meta name="keywords" content="Wicked Kid Alex, Alex O'Rourke, online game, pong game">
+    <meta name="author" content="Alex O'Rourke">
+    <link rel="canonical" href="https://wickedkidalex.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wickedkidalex.com/">
+    <meta property="og:title" content="Wicked Kid Alex | Pong Game by Alex O'Rourke">
+    <meta property="og:description" content="Play this fun interactive pong-style game created by Alex O'Rourke.">
+    <meta property="og:site_name" content="Wicked Kid Alex">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://wickedkidalex.com/">
+    <meta name="twitter:title" content="Wicked Kid Alex | Pong Game by Alex O'Rourke">
+    <meta name="twitter:description" content="Play this fun interactive pong-style game created by Alex O'Rourke.">
     <link rel="stylesheet" href="styles.css">
     <!-- Corrected script tag to load the module -->
     <script type="module" src="script.js"></script>
-    <title>Document</title>
+    <title>Wicked Kid Alex | Pong Game by Alex O'Rourke</title>
 </head>
 <body>
-    <div><p class="title">An Alex O'Rourke game</p></div>
-    <div class="score">
-        <div id="player-score">0</div>
-        <div id="computer-score">0</div>
-    </div>    
-    <!-- Ensure ball and paddles are within the body element -->
-    <div class="ball" id="ball"></div>
-    <div class="paddle left" id="player-paddle"></div>
-    <div class="paddle right" id="computer-paddle"></div>
+    <header>
+        <h1 class="title">Wicked Kid Alex - An Alex O'Rourke Game</h1>
+    </header>
+    <main>
+        <section class="game-container">
+            <div class="score">
+                <div id="player-score">0</div>
+                <div id="computer-score">0</div>
+            </div>
+            <!-- Game elements -->
+            <div class="ball" id="ball" aria-label="Game ball"></div>
+            <div class="paddle left" id="player-paddle" aria-label="Player paddle"></div>
+            <div class="paddle right" id="computer-paddle" aria-label="Computer paddle"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Alex O'Rourke. All rights reserved.</p>
+    </footer>
 </body>
 </html>
