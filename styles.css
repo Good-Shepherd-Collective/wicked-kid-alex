@@ -17,10 +17,13 @@ overflow: hidden;
 
 .game-container {
 position: relative;
-width: 100%;
-height: calc(100vh - 150px);
-margin-top: 120px;
+width: calc(100% - 30px);
+max-width: 800px;
+height: calc(100vh - 200px);
+margin: 120px auto 30px;
 overflow: hidden;
+border-radius: 10px;
+border: 2px solid hsla(var(--hue), var(--saturation), 65%, 0.3);
 }
 
 .paddle {
@@ -64,7 +67,7 @@ transform: translate(-50%, -50%);
     justify-content: center;
     font-weight: 800;
     color: var(--foreground-color);
-    font-size: 5vh;
+    font-size: clamp(2rem, 5vh, 3rem);
     font-family: monospace;
     position: absolute;
     top: -90px;
@@ -85,10 +88,45 @@ transform: translate(-50%, -50%);
     padding-right: 3.5vh;
 }
 
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .game-container {
+        height: calc(100vh - 180px);
+        margin-top: 100px;
+    }
+
+    .score {
+        top: -70px;
+    }
+
+    .paddle {
+        height: 2vh;
+        width: 20vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        height: calc(100vh - 150px);
+        margin-top: 80px;
+    }
+
+    .score {
+        top: -60px;
+    }
+
+    .ball {
+        width: 5vh;
+        height: 5vh;
+    }
+}
+
 .title {
     color: var(--foreground-color);
     font-family: monospace;
     text-align: center;
     margin-top: 20px;
     margin-bottom: 10px;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    padding: 0 10px;
 }

@@ -54,10 +54,18 @@ function handleLose() {
 function handleTouchMove(e) {
   if (!isTouchDevice) return
   e.preventDefault()
+
+  // Prevent scrolling
+  e.stopPropagation()
+
   const touch = e.touches[0]
   const gameContainer = document.querySelector('.game-container').getBoundingClientRect()
-  const position = Math.max(0, Math.min(100, ((touch.clientX - gameContainer.left) / gameContainer.width) * 100))
-  playerPaddle.position = position
+
+  // Check if touch is within game container bounds
+  if (touch.clientY >= gameContainer.top && touch.clientY <= gameContainer.bottom) {
+    const position = Math.max(0, Math.min(100, ((touch.clientX - gameContainer.left) / gameContainer.width) * 100))
+    playerPaddle.position = position
+  }
 }
 
 // Handle mouse movement
