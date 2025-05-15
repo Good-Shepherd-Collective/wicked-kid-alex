@@ -1,5 +1,5 @@
-const INITIAL_VELOCITY = 0.025
-const VELOCITY_INCREASE = 0.00001
+const INITIAL_VELOCITY = 0.015
+const VELOCITY_INCREASE = 0.000002
 
 export default class Ball {
   constructor(ballElem) {
@@ -28,8 +28,10 @@ export default class Ball {
   }
 
   reset() {
+    // Center horizontally
     this.x = 50
-    this.y = 50
+    // Start at 40% from the top of the game area
+    this.y = 40
     this.direction = { x: 0 }
     while (
       Math.abs(this.direction.x) <= 0.2 ||
@@ -44,15 +46,19 @@ export default class Ball {
   update(delta, paddleRects) {
     this.x += this.direction.x * this.velocity * delta
     this.y += this.direction.y * this.velocity * delta
-    this.velocity += VELOCITY_INCREASE * delta
-    const rect = this.rect()
 
-    if (rect.bottom >= window.innerHeight || rect.top <= 0) {
-      this.direction.y *= -1
+    // Increase velocity but cap it at a maximum value
+    this.velocity = Math.min(this.velocity + VELOCITY_INCREASE * delta, 0.03)
+
+    const rect = this.rect()
+    const gameContainer = document.querySelector('.game-container').getBoundingClientRect()
+
+    if (rect.right >= gameContainer.right || rect.left <= gameContainer.left) {
+      this.direction.x *= -1
     }
 
     if (paddleRects.some(r => isCollision(r, rect))) {
-      this.direction.x *= -1
+      this.direction.y *= -1
     }
   }
 }

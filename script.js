@@ -15,7 +15,7 @@ function update(time) {
   if (lastTime != null) {
     const delta = time - lastTime
     ball.update(delta, [playerPaddle.rect(), computerPaddle.rect()])
-    computerPaddle.update(delta, ball.y)
+    computerPaddle.update(delta, ball.x)
     const hue = parseFloat(
       getComputedStyle(document.documentElement).getPropertyValue("--hue")
     )
@@ -31,15 +31,20 @@ function update(time) {
 
 function isLose() {
   const rect = ball.rect()
-  return rect.right >= window.innerWidth || rect.left <= 0
+  const gameContainer = document.querySelector('.game-container').getBoundingClientRect()
+  return rect.bottom >= gameContainer.bottom || rect.top <= gameContainer.top
 }
 
 function handleLose() {
   const rect = ball.rect()
-  if (rect.right >= window.innerWidth) {
-    playerScoreElem.textContent = parseInt(playerScoreElem.textContent) + 1
-  } else {
+  const gameContainer = document.querySelector('.game-container').getBoundingClientRect()
+
+  if (rect.bottom >= gameContainer.bottom) {
+    // Ball hit bottom of game container - computer scores
     computerScoreElem.textContent = parseInt(computerScoreElem.textContent) + 1
+  } else {
+    // Ball hit top of game container - player scores
+    playerScoreElem.textContent = parseInt(playerScoreElem.textContent) + 1
   }
   ball.reset()
   computerPaddle.reset()
@@ -50,13 +55,17 @@ function handleTouchMove(e) {
   if (!isTouchDevice) return
   e.preventDefault()
   const touch = e.touches[0]
-  playerPaddle.position = (touch.clientY / window.innerHeight) * 100
+  const gameContainer = document.querySelector('.game-container').getBoundingClientRect()
+  const position = Math.max(0, Math.min(100, ((touch.clientX - gameContainer.left) / gameContainer.width) * 100))
+  playerPaddle.position = position
 }
 
 // Handle mouse movement
 function handleMouseMove(e) {
   if (isTouchDevice) return
-  playerPaddle.position = (e.y / window.innerHeight) * 100
+  const gameContainer = document.querySelector('.game-container').getBoundingClientRect()
+  const position = Math.max(0, Math.min(100, ((e.x - gameContainer.left) / gameContainer.width) * 100))
+  playerPaddle.position = position
 }
 
 // Detect touch capability and set up appropriate listeners
@@ -90,4 +99,8 @@ function initializeInputHandlers() {
 
 // Initialize the game
 initializeInputHandlers()
+
+// Set initial player paddle position
+playerPaddle.position = 50
+
 window.requestAnimationFrame(update)

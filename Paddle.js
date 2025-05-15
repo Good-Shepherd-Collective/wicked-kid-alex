@@ -1,4 +1,4 @@
-const SPEED = 0.02
+const SPEED = 0.008
 
 export default class Paddle {
   constructor(paddleElem) {
@@ -24,7 +24,7 @@ export default class Paddle {
     this.position = 50
   }
 
-  update(delta, ballHeight) {
-    this.position += SPEED * delta * (ballHeight - this.position)
+  update(delta, ballWidth) {
+    this.position += SPEED * delta * (ballWidth - this.position)
   }
 }
